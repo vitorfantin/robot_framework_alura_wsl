@@ -3,7 +3,9 @@
 *** Settings ***
 
 Library    SeleniumLibrary
-
+Resource    setup_teradown.robot
+Test Setup    Dado acessa o siste
+Test Teardown    Fechar navegador
 
 # variables é como se fosse uma classe talvez, mas ela é direcionada em um campo especifico. 
 *** Variables ***  
@@ -24,19 +26,16 @@ ${cargo_inovacao}    //option[contains(.,'Inovação')]
 
 # Keywords ao veu ver como se fosse criação de uma funcao, mas com sua particularidade
 *** Keywords *** 
-Dado que eu acesse o Organo
-    Open Browser    http://localhost:3000    chrome
 
-E preencha os campos do formulário
+Dado preencha os campos do formulário
    Input Text    ${campo_nome}    Vitor 
    Input Text    ${campo_cargo}    QA 
    Input Text    ${campo_imagem}    https://picsum.dev/300/200
    Click Element    ${campo_time_lista_suspensa} 
    Click Element    ${cargo_programacao} 
-   Sleep    15s
 E clique no botão "Criar Card"
     Click Button    ${botao_criar_card}
-    Sleep    15s
+    Sleep    10s
 Então identificar o card no time esperado    
     Element Should Be Visible    class:colaborador
 
@@ -44,7 +43,6 @@ Então identificar o card no time esperado
 *** Test Cases ***
 
 Verificar se ao preencher corretamente o formulário os dados são inseridos corretamente na lista e se um novo card é criado no time escolhido
-     Dado que eu acesse o Organo
-     E preencha os campos do formulário
+     Dado preencha os campos do formulário
      E clique no botão "Criar Card"
      Então identificar o card no time esperado
