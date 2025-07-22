@@ -1,6 +1,6 @@
 # 🚀 Projeto Robot Framework - Alura (WSL Ubuntu)
 
-Este projeto é um exemplo didático de automação de testes com **Robot Framework + Selenium**, usando o **WSL Ubuntu no Windows 11**.
+Este projeto é um exemplo didático de automação de testes com **Robot Framework + Selenium + FakerLibrary**, usando o **WSL Ubuntu no Windows 11**.
 
 Obs: Processo de instalação WSL não está incluso no treinamento da plataforma alura, inseri aqui como uma maneira de salvar os processos, guia abaixo foi gerado com auxilio do ChatGPT. 
 
@@ -137,6 +137,14 @@ Você verá algo assim no terminal:
 ```
 
 ---
+### Instalar FakerLibrary - será usado para utilizar massa de dados
+
+No verá algo assim no terminal:
+
+```bash
+(ambiente-virtual) vitor@vfantin:~/robot_framework_alura_wsl$
+```
+digite ```pip install robotframework-faker```
 
 ### 4. Criar o arquivo de dependências
 
@@ -146,6 +154,7 @@ Crie o arquivo `requirements.txt` com este conteúdo:
 robotframework
 selenium
 robotframework-seleniumlibrary
+robotframework-faker
 ```
 
 ### 5. Instalar as dependências Python no ambiente virtual

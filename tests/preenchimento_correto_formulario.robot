@@ -3,6 +3,7 @@
 *** Settings ***
 
 Library    SeleniumLibrary
+Library    FakerLibrary    pt_BR
 Resource    setup_teradown.robot
 Test Setup    Dado acessa o siste
 Test Teardown    Fechar navegador
@@ -28,11 +29,15 @@ ${cargo_inovacao}    //option[contains(.,'Inovação')]
 *** Keywords *** 
 
 Dado preencha os campos do formulário
-   Input Text    ${campo_nome}    Vitor 
-   Input Text    ${campo_cargo}    QA 
-   Input Text    ${campo_imagem}    https://picsum.dev/300/200
-   Click Element    ${campo_time_lista_suspensa} 
-   Click Element    ${cargo_programacao} 
+    ${Nome_Faker}    FakerLibrary.First Name
+    ${Cargo_Faker}   FakerLibrary.Job
+    ${Imagem_Faker}    FakerLibrary.Image Url
+
+    Input Text    ${campo_nome}    ${Nome_Faker} 
+    Input Text    ${campo_cargo}    ${Cargo_Faker}
+    Input Text    ${campo_imagem}    ${Imagem_Faker}
+    Click Element    ${campo_time_lista_suspensa} 
+    Click Element    ${cargo_programacao} 
 E clique no botão "Criar Card"
     Click Button    ${botao_criar_card}
     Sleep    10s
@@ -43,7 +48,6 @@ Criação de 3 cards em laço for
     FOR    ${i}    IN RANGE    0    3    
         Dado preencha os campos do formulário
         E clique no botão "Criar Card"
-         
     END    
     Sleep    15s
 
