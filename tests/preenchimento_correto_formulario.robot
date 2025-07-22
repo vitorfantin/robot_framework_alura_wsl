@@ -39,6 +39,14 @@ E clique no botão "Criar Card"
 Então identificar o card no time esperado    
     Element Should Be Visible    class:colaborador
 
+Criação de 3 cards em laço for
+    FOR    ${i}    IN RANGE    0    3    
+        Dado preencha os campos do formulário
+        E clique no botão "Criar Card"
+         
+    END    
+    Sleep    15s
+
 # test cases é o ambiente de execução, pensa como se fosse o main(){ codigo fonte } em Dart
 *** Test Cases ***
 
@@ -46,3 +54,7 @@ Verificar se ao preencher corretamente o formulário os dados são inseridos cor
      Dado preencha os campos do formulário
      E clique no botão "Criar Card"
      Então identificar o card no time esperado
+
+Verificação dos 3 cards criados no laço FOR
+    Criação de 3 cards em laço for
+   
