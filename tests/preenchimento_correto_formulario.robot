@@ -16,13 +16,14 @@ ${campo_cargo}    id:form-cargo
 ${campo_imagem}    id:form-imagem 
 ${campo_time_lista_suspensa}    class:lista-suspensa 
 ${botao_criar_card}    id:form-botao 
-${cargo_programacao}    //option[contains(.,'Programação')]
-${cargo_front-end}    //option[contains(.,'Front-End')]
-${cargo_dados}    //option[contains(.,'Data Science')]
-${cargo_devops}    //option[contains(.,'Devops')]
-${cargo_ux}    //option[contains(.,'UX e Design')]
-${cargo_mobile}    //option[contains(.,'Mobile')]
-${cargo_inovacao}    //option[contains(.,'Inovação')]
+@{lista_times}    
+...    //option[contains(.,'Programação')]
+...    //option[contains(.,'Front-End')]
+...    //option[contains(.,'Data Science')]
+...    //option[contains(.,'Devops')]
+...    //option[contains(.,'UX e Design')]
+...    //option[contains(.,'Mobile')]
+...    //option[contains(.,'Inovação')]
 
 
 # Keywords ao veu ver como se fosse criação de uma funcao, mas com sua particularidade
@@ -31,16 +32,16 @@ ${cargo_inovacao}    //option[contains(.,'Inovação')]
 Dado preencha os campos do formulário
     ${Nome_Faker}    FakerLibrary.First Name
     ${Cargo_Faker}   FakerLibrary.Job
-    ${Imagem_Faker}    FakerLibrary.Image Url
+    ${Imagem_Faker}    FakerLibrary.Image Url    width=100    height=100
 
     Input Text    ${campo_nome}    ${Nome_Faker} 
     Input Text    ${campo_cargo}    ${Cargo_Faker}
     Input Text    ${campo_imagem}    ${Imagem_Faker}
     Click Element    ${campo_time_lista_suspensa} 
-    Click Element    ${cargo_programacao} 
+    Click Element    ${lista_times}[0]
 E clique no botão "Criar Card"
     Click Button    ${botao_criar_card}
-    Sleep    10s
+   
 Então identificar o card no time esperado    
     Element Should Be Visible    class:colaborador
 
@@ -49,7 +50,14 @@ Criação de 3 cards em laço for
         Dado preencha os campos do formulário
         E clique no botão "Criar Card"
     END    
-    Sleep    15s
+    
+
+Então criar e identificar 1 card em cada time disponivel
+    FOR    ${index}    ${time_desenvolvimento}    IN ENUMERATE    @{lista_times}
+        Dado preencha os campos do formulário
+        Click Element    ${time_desenvolvimento}
+        E clique no botão "Criar Card"              
+    END
 
 # test cases é o ambiente de execução, pensa como se fosse o main(){ codigo fonte } em Dart
 *** Test Cases ***
@@ -58,7 +66,14 @@ Verificar se ao preencher corretamente o formulário os dados são inseridos cor
      Dado preencha os campos do formulário
      E clique no botão "Criar Card"
      Então identificar o card no time esperado
+     Sleep    10s
 
 Verificação dos 3 cards criados no laço FOR
     Criação de 3 cards em laço for
-   
+    Sleep    10s
+
+Verificar criar um card para cada time com preenchimento dos campos corretamente
+    Dado preencha os campos do formulário
+    Então criar e identificar 1 card em cada time disponivel
+    Sleep    30s
+    
