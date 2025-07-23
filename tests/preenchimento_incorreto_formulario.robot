@@ -1,6 +1,5 @@
 *** Settings ***
-Library    SeleniumLibrary
-Resource    setup_teradown.robot
+Resource    ../resources/main.robot
 Test Setup    Dado acessa o siste
 Test Teardown    Fechar navegador
 
