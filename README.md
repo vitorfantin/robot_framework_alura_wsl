@@ -1,6 +1,8 @@
 # 🚀 Projeto Robot Framework - Alura (WSL Ubuntu)
 
-Este projeto é um exemplo didático de automação de testes com **Robot Framework + Selenium + FakerLibrary**, usando o **WSL Ubuntu no Windows 11**.
+
+
+Este projeto é um exemplo didático de automação de testes com **Robot Framework + Selenium + FakerLibrary**, usando o **WSL Ubuntu no Windows 11**
 
 Obs: Processo de instalação WSL não está incluso no treinamento da plataforma alura, inseri aqui como uma maneira de salvar os processos, guia abaixo foi gerado com auxilio do ChatGPT. 
 
